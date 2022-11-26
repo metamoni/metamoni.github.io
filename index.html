@@ -26,33 +26,32 @@
 
     <div id="articles-container">
       <article>
-        <h3>Images</h3>
-        <p>All images must have an <code>alt</code> attribute. This allows screen readers to either describe relevant images to users or hide them if they're not relevant. <a href="pages/images">Accessible images in Rails</a>
+        <h2>Images</h2>
+        <p>All images must have an <code>alt</code> attribute. This allows screen readers to either describe relevant images to users or hide them if they're not relevant. <a href="pages/images">Read more about accessible images in Rails</a>
         </p>
       </article>
+
       <article>
-        <h3>Forms</h3>
-        <p>The purpose of each form field should be clear. Missing labels are one of the most common accessibility issues in web forms. <a href="pages/forms">Accessible form helpers in Rails</a></p>
+        <h2>Forms</h2>
+        <p>The purpose of each form field should be clear. Missing labels are one of the most common accessibility issues in web forms. <a href="pages/forms">Read more about accessible form helpers in Rails</a></p>
+      </article>
+
+      <article>
+        <h2>Flash messages</h2>
+        <p>
+          Dynamic page updates, including flash messages, need a bit more work to be accessible to assistive tech users. <a href="pages/flash">Read more about accessible flash messages in Rails</a>
+        </p>
+      </article>
+
+      <article>
+        <h3>Form validation</h3>
+        <p>Just like flash messages, custom validation errors are usually skipped by screen readers. ARIA live regions and ARIA roles can make your forms accessible to assistive tech users. <a href="pages/validation">Read more about accessible form validation in Rails</a></p>
+      </article>
+
+      <article>
+        <h2>Document language</h2>
+        <p>Adding a <code>lang</code> attribute to your HTML is an easy win. It helps render the text more accurately, load the correct pronunciation rules, and display video captions correctly. <a href="pages/language.html">Read more about document language in Rails.</a></p>
       </article>
     </div>
   </body>
 </html>
-
-<!-- 
-  <%= render "shared/article_preview",
-                title: "Forms",
-                text: "The purpose of each form field should be clear. Missing labels are one of the most common accessibility issues in web forms. Learn how to use form helpers the right way.",
-                link: forms_path %>
-  <%= render "shared/article_preview",
-                title: "Flash messages",
-                text: "Dynamic page updates, including flash messages, need a bit more work to be accessible to assistive tech users. Learn how to use ARIA live regions to make flash messages accessible.",
-                link: flash_messages_path %>
-  <%= render "shared/article_preview",
-                title: "Form validation",
-                text: "Just like flash messages, custom validation errors are usually skipped by screen readers. Learn how ARIA live regions and ARIA roles can make your forms accessible to assistive tech users.",
-                link: validations_path %>
-  <%= render "shared/article_preview",
-                title: "Document language",
-                text: "Adding a <code>lang</code> attribute to your HTML is an easy win. It helps render the text more accurately, load the correct pronunciation rules, and display video captions correctly.",
-                link: language_path %> -->
-</section>
