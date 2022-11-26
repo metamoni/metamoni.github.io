@@ -1,20 +1,37 @@
-<h1 id="homepage-header">Welcome to A11y on Rails!</h1>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Welcome to A11y on Rails!</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="styles.css">
+  
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Zilla+Slab+Highlight&family=Open+Sans&display=swap" rel="stylesheet">
+  </head>
 
-<p>In most traditional web apps you can achieve a reasonable level of accessibility with semantic HTML and a good page structure. Rails apps are no different. The framework provides lots of handy Action View Helpers and they come with everything you need to make your app accessible. However, just like when writing plain HTML, it's easy enough to forget about crucial attributes and end up with a page that is not accessible.</p>
+  <body>
+    <h1 id="homepage-header">Welcome to A11y on Rails!</h1>
 
-<p>This website aims to tackle some of the most important accessibility concerns that you'll need to address in a Rails apps. You can read more about the project <a href="/about">here</a>.</p>
+    <p>In most traditional web apps you can achieve a reasonable level of accessibility with semantic HTML and a good page structure. Rails apps are no different. The framework provides lots of handy Action View Helpers and they come with everything you need to make your app accessible. However, just like when writing plain HTML, it's easy enough to forget about crucial attributes and end up with a page that is not accessible.</p>
 
-<section id="articles-container">
-  <h2>Accessibility in Rails</h2>
-  <article>
-    <h3>Images</h3>
-    <p>All images must have an <code>alt</code> attribute. This allows screen readers to either describe relevant images to users or hide them if they're not relevant. <a href="/images">Accessible images in Rails</a>
-    </p>
-  </article>
-  <article>
-    <h3>Forms</h3>
-    <p>The purpose of each form field should be clear. Missing labels are one of the most common accessibility issues in web forms. <a href="/forms">Accessible form helpers in Rails</a></p>
-  </article>
+    <p>This website aims to tackle some of the most important accessibility concerns that you'll need to address in a Rails apps. You can read more about the project <a href="/about">here</a>.</p>
+
+    <div id="articles-container">
+      <article>
+        <h3>Images</h3>
+        <p>All images must have an <code>alt</code> attribute. This allows screen readers to either describe relevant images to users or hide them if they're not relevant. <a href="/images">Accessible images in Rails</a>
+        </p>
+      </article>
+      <article>
+        <h3>Forms</h3>
+        <p>The purpose of each form field should be clear. Missing labels are one of the most common accessibility issues in web forms. <a href="/forms">Accessible form helpers in Rails</a></p>
+      </article>
+    </div>
+  </body>
+</html>
+
 <!-- 
   <%= render "shared/article_preview",
                 title: "Forms",
