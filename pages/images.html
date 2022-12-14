@@ -12,113 +12,117 @@
   </head>
 
   <body>
-    <h1>Accessible images</h1>
+    <header>
+      <h1>How to make images accessible</h1>
+      <nav aria-label="Page contents menu">
+        <h2>Contents</h2>
+        <ol>
+          <li><a href="#images-problem">The problem</a></li>
+          <li><a href="#images-rails">Images in Rails</a></li>
+          <li><a href="#images-how-to">How it works</a></li>
+          <li><a href="#accessible-svgs">Accessible SVGs</a></li>
+          <li><a href="#images-sr-testing">Screen reader testing</a></li>
+          <li><a href="#images-resources">Resources</a></li>
+        </ol>
+      </nav>
+    </header>
 
-    <nav aria-label="Page contents menu">
-      <h2>Contents</h2>
-      <ol>
-        <li><a href="#images-problem">The problem</a></li>
-        <li><a href="#images-rails">Images in Rails</a></li>
-        <li><a href="#images-how-to">How it works</a></li>
-        <li><a href="#accessible-svgs">Accessible SVGs</a></li>
-        <li><a href="#images-sr-testing">Screen reader testing</a></li>
-        <li><a href="#images-resources">Resources</a></li>
-      </ol>
-    </nav>
-    <article aria-labelledby="images-problem-header" id="images-problem">
-      <h2 id="images-problem-header">The problem</h2>
-      <p>According to the <a href="https://webaim.org/projects/million/">WebAIM Million</a>, an annual accessibility audit of the top 1,000,000 websites, missing alternative text for images is the second most common issue.</p>
-    
-      <p>All images on the web must have an <code>alt</code> attribute. Screen readers need to be able to describe relevant images to users, and they can only do that if there's an <code>alt</code> text. Decorative images, on the other hand, are a hindrance to assistive tech users and should be ignored with <code>alt=""</code>.</p>
-    </article>
-    
-    <article aria-labelledby="images-rails-header" id="images-rails">
-      <h2 id="images-rails-header">Images in Rails</h2>
-      <p>
-        Rails' image_tag helper makes it easy to add images to your website. <code><%%= image_tag "icon.png" %></code> will generate the following HTML: <code>&lt;img src="/assets/icon.png" /&gt;</code>. To make this accessible, you need to add an <code>alt</code> attribute, like so:
-      </p>
-      <p>
+    <main>
+      <article aria-labelledby="images-problem-header" id="images-problem">
+        <h2 id="images-problem-header">The problem</h2>
+        <p>According to the <a href="https://webaim.org/projects/million/">WebAIM Million</a>, an annual accessibility audit of the top 1,000,000 websites, missing alternative text for images is the second most common issue.</p>
+      
+        <p>All images on the web must have an <code>alt</code> attribute. Screen readers need to be able to describe relevant images to users, and they can only do that if there's an <code>alt</code> text. Decorative images, on the other hand, are a hindrance to assistive tech users and should be ignored with <code>alt=""</code>.</p>
+      </article>
+      
+      <article aria-labelledby="images-rails-header" id="images-rails">
+        <h2 id="images-rails-header">Images in Rails</h2>
+        <p>
+          Rails' image_tag helper makes it easy to add images to your website. <code><%%= image_tag "icon.png" %></code> will generate the following HTML: <code>&lt;img src="/assets/icon.png" /&gt;</code>. To make this accessible, you need to add an <code>alt</code> attribute, like so:
+        </p>
+        <p>
+          <iframe
+            src="https://www.thiscodeworks.com/embed/62ac46f58e180e00152748ab"
+            style="width: 100%; height: 99px;"
+            frameborder="0"
+            title="Add alternative text to image_tag">
+          </iframe>
+        </p>
+      </article>
+      
+      <article aria-labelledby="images-how-to-header" id="images-how-to">
+        <h2 id="images-how-to-header">How it works</h2>
+      
+        <p>To sighted users, the two images below might look identical. Screen reader users, on the other hand, will get a completely different experience.</p>
+      
+        <h3>Without an alt text</h3>
+      
+        <p>On its own, <code><%%= image_tag "bruno.jpg" %></code> generates an image without <code>alt</code> text. Without any information to go on, screen readers will describe it as an "unlabelled image".</p>
+        
+        <img src="../images/bruno.jpg" style="height: 50%; width: 50%;" />
+      
+        <h3>With a descriptive alt text</h3>
+        <p>However, if we change this to <code><%%= image_tag "bruno.jpg", alt: "A brown cocker spaniel lying on the floor, its tongue sticking out slightly" %></code>, the screen reader will announce the provided alt text. Make sure it's descriptive and no more than 150 characters long.</p>
+
+        <img src="../images/bruno.jpg" style="height: 50%; width: 50%;" alt="A brown cocker spaniel lying on the floor, its tongue sticking out slightly" />
+      </article>
+      
+      <article aria-labelledby="accessible-svgs-header" id="accessible-svgs">
+        <h2 id="accessible-svgs-header">Accessible SVGs</h2>
+        <p>SVGs are a bit different because they don't have an <code>alt</code> attribute. Instead, they need <code>role="img"</code>, along with a <code>title</code> and, optionally, a description inside a <code>desc</code> tag. Decorative SVGs should be hidden with <code>role="presentation"</code> or <code>aria-hidden="true"</code>.</p>
+      
+        <p>James Martin's <%= link_to "inline_svg", "https://github.com/jamesmartin/inline_svg" %> gem allows you to use the <code>inline_svg_tag</code> helper to add a title and description. It also adds an ARIA label for additional support across different browsers and screen readers. Here's the correct usage for an image that needs text:</p>
+      
         <iframe
-          src="https://www.thiscodeworks.com/embed/62ac46f58e180e00152748ab"
+          src="https://www.thiscodeworks.com/embed/62ac489c8e180e00152748af"
+          style="width: 100%; height: 164px;"
+          frameborder="0"
+          title="Use the inline_svg_tag helper with ARIA">
+        </iframe>
+      
+        <p>and for a hidden SVG:</p>
+      
+        <iframe
+          src="https://www.thiscodeworks.com/embed/62ac49288e180e00152748b6"
           style="width: 100%; height: 99px;"
           frameborder="0"
-          title="Add alternative text to image_tag">
+          title="Hide decorative inline SVGs">
         </iframe>
-      </p>
-    </article>
-    
-    <article aria-labelledby="images-how-to-header" id="images-how-to">
-      <h2 id="images-how-to-header">How it works</h2>
-    
-      <p>To sighted users, the two images below might look identical. Screen reader users, on the other hand, will get a completely different experience.</p>
-    
-      <h3>Without an alt text</h3>
-    
-      <p>On its own, <code><%%= image_tag "bruno.jpg" %></code> generates an image without <code>alt</code> text. Without any information to go on, screen readers will describe it as an "unlabelled image".</p>
       
-      <img src="../images/bruno.jpg" style="height: 50%; width: 50%;" />
-    
-      <h3>With a descriptive alt text</h3>
-      <p>However, if we change this to <code><%%= image_tag "bruno.jpg", alt: "A brown cocker spaniel lying on the floor, its tongue sticking out slightly" %></code>, the screen reader will announce the provided alt text. Make sure it's descriptive and no more than 150 characters long.</p>
-
-      <img src="../images/bruno.jpg" style="height: 50%; width: 50%;" alt="A brown cocker spaniel lying on the floor, its tongue sticking out slightly" />
-    </article>
-    
-    <article aria-labelledby="accessible-svgs-header" id="accessible-svgs">
-      <h2 id="accessible-svgs-header">Accessible SVGs</h2>
-      <p>SVGs are a bit different because they don't have an <code>alt</code> attribute. Instead, they need <code>role="img"</code>, along with a <code>title</code> and, optionally, a description inside a <code>desc</code> tag. Decorative SVGs should be hidden with <code>role="presentation"</code> or <code>aria-hidden="true"</code>.</p>
-    
-      <p>James Martin's <%= link_to "inline_svg", "https://github.com/jamesmartin/inline_svg" %> gem allows you to use the <code>inline_svg_tag</code> helper to add a title and description. It also adds an ARIA label for additional support across different browsers and screen readers. Here's the correct usage for an image that needs text:</p>
-    
-      <iframe
-        src="https://www.thiscodeworks.com/embed/62ac489c8e180e00152748af"
-        style="width: 100%; height: 164px;"
-        frameborder="0"
-        title="Use the inline_svg_tag helper with ARIA">
-      </iframe>
-    
-      <p>and for a hidden SVG:</p>
-    
-      <iframe
-        src="https://www.thiscodeworks.com/embed/62ac49288e180e00152748b6"
-        style="width: 100%; height: 99px;"
-        frameborder="0"
-        title="Hide decorative inline SVGs">
-      </iframe>
-    
-      <p>If you don't want to add another gem, you can write your own helper. I used this <a href="https://thoughtbot.com/blog/organized-workflow-for-svg">SVG example from thoughtbot</a> as a starting point to create <a href="../helper/svg_helper.html">a simple SVG helper</a>. When no title is specified, the SVG gets <code>aria-hidden="true"</code> and the image is hidden from screen readers. If a <code>title</code> is specified, the <code>role</code> is updated to <code>img</code>. You can extend this to support a <code>desc</code>, <code>aria-label</code>, or any other attribute you need. Here's how it works:</p>
-    
-      <iframe
-        src="https://www.thiscodeworks.com/embed/62ac49dc8e180e00152748b8"
-        style="width: 100%; height: 99px;"
-        frameborder="0"
-        title="Accessible SVG using custom helper">
-      </iframe>
-    
-      <svg role="img" aria-labelledby="edinburgh-skyline" viewBox="0 0 1000 780" style="background-color:DarkSlateBlue">
-        <title id="edinburgh-skyline">A drawing of the Edinburgh skyline on a purple background</title>
-        <g stroke="#F5F5F5" stroke-width="2.1046" fill="none">
-          <path d="M2.3427 454.545l7.8633-.158-.0794-9.849 8.5781.039.3177-17.99 10.0078.199s4.791-7.489 10.2858-7.427c0 0 4.4255.12 10.4446.119 5.7114 0 10.9609 7.864 10.9609 7.864l10.8624-.461-.1352 21.775 13.8634-.27.541-18.597-.8791-13.39 1.0144-22.791-.6766-3.706 3.237-8.055.7528-7.452-3.9146-1.355 5.9471-28.004 3.3123 29.434-2.4796.431.6558 5.276s4.2286 8.287 4.3715 8.287c.1429 0-.3334 4.716-.3334 4.716l-.1906 16.007 2.8584-.048-.8099-50.974 2.9064 6.527.774-20.866 3.633 6.458 13.589-131.754 11.022 131.066 3.618-6.862.671 22.078 3.841-7.72.01 51.368 2.418-21.631 2.155-5.336.495-6.926-1.838-.955 4.371-28.794 3.818 28.626-1.498 1.345.077 5.972 3.627 9.37-.799 23.625 2.686 12.321-.648 3.427-.956 15.979 5.766 3.817v-9.908l4.894.013.059-4.885 20.539-.136.007 5.658 5.605-.009-.094 4.908 11.771-.013s5.478-13.184 17.006-14.403c10.719-1.134 14.299-.418 17.293.038 13.246 2.014 19.309 13.053 19.309 13.053l.703 10.885 12.377-.263.878-47.578 14.483-33.708 14.045 31.777-1.053 28.178 24.491-.176.878-38.623 33.62-.088.781 47.028 9.396-.097v-38.358l3.429.137.345-9.381 3.518.184.024-7.796 22.425-10.888 22.896 11.221-.182 7.792 4.805.208-.104 8.702 3.819.364-.48 25.953 20.971.228-.203 25.815h14.069l-.088-14.553-3.517-3.869 1.099-3.034.71-43.749 2.86.065 1.414-47.864-2.704-4.784-3.016-4.264-.343-2.328 2.258-.113.584-48.172s2.547-2.802 2.682-2.835c.135-.034 3.19 3.595 3.19 3.595l-.354 1.502 6.565-.101 4.083-6.894.221-11.809-1.506-.081.366-2.236 2.063.057-.077-3.103.675-.945 1.06-.135-.039-4.665 5.132-7.429 1.624-.333-.005-19.891 1.621-.074.788 19.099 1.444 1.179 1.096 2.108 3.287 5.096-.284 4.794 1.954.165.298 3.577 2.02.331-.033 1.855-1.722.198.28 11.223 3.666 8.574 8.18-.056-.79-3.498 2.426-1.749 2.933 1.862-.338 3.441.907 45.288 3.233.443v2.907l-3.206 1.603h-2.423l.447 5.181-.513 48.69 3.369.347-.294 37.106 14.779-1.326-1.06-15.972 28.1.332.464 10.405 18.755-.398-.684 34.158 11.528.253-.887-16.72 15.581-1.521-.149-45.481 3.786-8.212 4.853 6.666-.412 10.972 47.889-.149-.858-10.519 3.259-6.86 3.716 6.06-1.086 40.303 24.41-.572.629-22.066 16.733-.353s2.776-7.375 12.065-7.588c10.123-.233 4.209-.194 13.538.164 9.527.365 12.447 8.025 12.447 8.025l14.439-.24.788 29.32 10.243-.056-1.126-47.047 5.065-1.013v-4.164l15.757-14.632 14.069 14.294-.168 5.234 4.643.197.932 56.542 4.863-.141-.422-14.932 1.875-.168.499-10.859 3.213-17.303 1.327 6.852.386 2.399 18.845-.514.586-18.525 2.928-7.551-.616-19.11 2.204.196 9.627-62.865 6.761 48.474 2.421.263-.977-38.494 5.284.395 14.133-91.797 14.947 91.866 4.318.045-.353 36.526 3.7.587 5.344-48.505 9.192 63.063 2.951 1.19.355 17.519 3.372 8.478-1.431 18.695 19.002-.511 1.431-8.888 2.962 8.173.272 8.996.191 12.756 2.627-.19-.761 23.95 8.567-.419-1.523-39.219 6.168-.19.381-5.293 32.16-.047.132 5.089 4.633-.217-.869 40.1"/>
-          <path d="M478.19 318.949c0-4.265 3.653-7.723 8.158-7.723 4.506 0 8.159 3.458 8.159 7.723 0 4.266-3.653 7.723-8.159 7.723-4.505 0-8.158-3.457-8.158-7.723z"/>
-        </g>
-      </svg>
-    </article>
-    
-    <article class="tip-container mt-2" aria-labelledby="images-sr-testing-header" id="images-sr-testing">
-      <h2 id="images-sr-testing-header" class="tip-title">Try it yourself</h2>
-      <p>If you're on a Mac, you can test this yourself with VoiceOver. Press <code>cmd + F5</code> to turn it on, then use <code>control + option + right/left arrow</code> to navigate to the desired image. When you're done you can switch VoiceOver off with <code>cmd + F5</code>.</p>
-    </article>
-    
-    <article class="mb-2" aria-labelledby="images-resources-header" id="images-resources">
-      <h2 id="images-resources-header">Resources</h2>
-      <ul>
-        <li><a href="https://webaim.org/techniques/alttext/">WebAIM - Alternative Text</a></li>
-        <li><a href="https://www.w3.org/WAI/tutorials/images/tips/">W3 WAI - Tips and tricks for writing alt text</a></li>
-        <li><a href="https://www.w3.org/WAI/tutorials/images/decision-tree/">W3 WAI - How to use alt text in various situations</a></li>
-        <li><a href="https://www.deque.com/blog/creating-accessible-svgs/">Creating accessible SVGs</a></li>
-        <li><a href="https://www.smashingmagazine.com/2021/05/accessible-svg-patterns-comparison/">Accessible SVGs: Perfect Patterns For Screen Reader Users</a></li>
-      </ul>
-    </article>
+        <p>If you don't want to add another gem, you can write your own helper. I used this <a href="https://thoughtbot.com/blog/organized-workflow-for-svg">SVG example from thoughtbot</a> as a starting point to create <a href="../helper/svg_helper.html">a simple SVG helper</a>. When no title is specified, the SVG gets <code>aria-hidden="true"</code> and the image is hidden from screen readers. If a <code>title</code> is specified, the <code>role</code> is updated to <code>img</code>. You can extend this to support a <code>desc</code>, <code>aria-label</code>, or any other attribute you need. Here's how it works:</p>
+      
+        <iframe
+          src="https://www.thiscodeworks.com/embed/62ac49dc8e180e00152748b8"
+          style="width: 100%; height: 99px;"
+          frameborder="0"
+          title="Accessible SVG using custom helper">
+        </iframe>
+      
+        <svg role="img" aria-labelledby="edinburgh-skyline" viewBox="0 0 1000 780" style="background-color:DarkSlateBlue">
+          <title id="edinburgh-skyline">A drawing of the Edinburgh skyline on a purple background</title>
+          <g stroke="#F5F5F5" stroke-width="2.1046" fill="none">
+            <path d="M2.3427 454.545l7.8633-.158-.0794-9.849 8.5781.039.3177-17.99 10.0078.199s4.791-7.489 10.2858-7.427c0 0 4.4255.12 10.4446.119 5.7114 0 10.9609 7.864 10.9609 7.864l10.8624-.461-.1352 21.775 13.8634-.27.541-18.597-.8791-13.39 1.0144-22.791-.6766-3.706 3.237-8.055.7528-7.452-3.9146-1.355 5.9471-28.004 3.3123 29.434-2.4796.431.6558 5.276s4.2286 8.287 4.3715 8.287c.1429 0-.3334 4.716-.3334 4.716l-.1906 16.007 2.8584-.048-.8099-50.974 2.9064 6.527.774-20.866 3.633 6.458 13.589-131.754 11.022 131.066 3.618-6.862.671 22.078 3.841-7.72.01 51.368 2.418-21.631 2.155-5.336.495-6.926-1.838-.955 4.371-28.794 3.818 28.626-1.498 1.345.077 5.972 3.627 9.37-.799 23.625 2.686 12.321-.648 3.427-.956 15.979 5.766 3.817v-9.908l4.894.013.059-4.885 20.539-.136.007 5.658 5.605-.009-.094 4.908 11.771-.013s5.478-13.184 17.006-14.403c10.719-1.134 14.299-.418 17.293.038 13.246 2.014 19.309 13.053 19.309 13.053l.703 10.885 12.377-.263.878-47.578 14.483-33.708 14.045 31.777-1.053 28.178 24.491-.176.878-38.623 33.62-.088.781 47.028 9.396-.097v-38.358l3.429.137.345-9.381 3.518.184.024-7.796 22.425-10.888 22.896 11.221-.182 7.792 4.805.208-.104 8.702 3.819.364-.48 25.953 20.971.228-.203 25.815h14.069l-.088-14.553-3.517-3.869 1.099-3.034.71-43.749 2.86.065 1.414-47.864-2.704-4.784-3.016-4.264-.343-2.328 2.258-.113.584-48.172s2.547-2.802 2.682-2.835c.135-.034 3.19 3.595 3.19 3.595l-.354 1.502 6.565-.101 4.083-6.894.221-11.809-1.506-.081.366-2.236 2.063.057-.077-3.103.675-.945 1.06-.135-.039-4.665 5.132-7.429 1.624-.333-.005-19.891 1.621-.074.788 19.099 1.444 1.179 1.096 2.108 3.287 5.096-.284 4.794 1.954.165.298 3.577 2.02.331-.033 1.855-1.722.198.28 11.223 3.666 8.574 8.18-.056-.79-3.498 2.426-1.749 2.933 1.862-.338 3.441.907 45.288 3.233.443v2.907l-3.206 1.603h-2.423l.447 5.181-.513 48.69 3.369.347-.294 37.106 14.779-1.326-1.06-15.972 28.1.332.464 10.405 18.755-.398-.684 34.158 11.528.253-.887-16.72 15.581-1.521-.149-45.481 3.786-8.212 4.853 6.666-.412 10.972 47.889-.149-.858-10.519 3.259-6.86 3.716 6.06-1.086 40.303 24.41-.572.629-22.066 16.733-.353s2.776-7.375 12.065-7.588c10.123-.233 4.209-.194 13.538.164 9.527.365 12.447 8.025 12.447 8.025l14.439-.24.788 29.32 10.243-.056-1.126-47.047 5.065-1.013v-4.164l15.757-14.632 14.069 14.294-.168 5.234 4.643.197.932 56.542 4.863-.141-.422-14.932 1.875-.168.499-10.859 3.213-17.303 1.327 6.852.386 2.399 18.845-.514.586-18.525 2.928-7.551-.616-19.11 2.204.196 9.627-62.865 6.761 48.474 2.421.263-.977-38.494 5.284.395 14.133-91.797 14.947 91.866 4.318.045-.353 36.526 3.7.587 5.344-48.505 9.192 63.063 2.951 1.19.355 17.519 3.372 8.478-1.431 18.695 19.002-.511 1.431-8.888 2.962 8.173.272 8.996.191 12.756 2.627-.19-.761 23.95 8.567-.419-1.523-39.219 6.168-.19.381-5.293 32.16-.047.132 5.089 4.633-.217-.869 40.1"/>
+            <path d="M478.19 318.949c0-4.265 3.653-7.723 8.158-7.723 4.506 0 8.159 3.458 8.159 7.723 0 4.266-3.653 7.723-8.159 7.723-4.505 0-8.158-3.457-8.158-7.723z"/>
+          </g>
+        </svg>
+      </article>
+      
+      <article class="tip-container mt-2" aria-labelledby="images-sr-testing-header" id="images-sr-testing">
+        <h2 id="images-sr-testing-header" class="tip-title">Try it yourself</h2>
+        <p>If you're on a Mac, you can test this yourself with VoiceOver. Press <code>cmd + F5</code> to turn it on, then use <code>control + option + right/left arrow</code> to navigate to the desired image. When you're done you can switch VoiceOver off with <code>cmd + F5</code>.</p>
+      </article>
+      
+      <article class="mb-2" aria-labelledby="images-resources-header" id="images-resources">
+        <h2 id="images-resources-header">Resources</h2>
+        <ul>
+          <li><a href="https://webaim.org/techniques/alttext/">WebAIM - Alternative Text</a></li>
+          <li><a href="https://www.w3.org/WAI/tutorials/images/tips/">W3 WAI - Tips and tricks for writing alt text</a></li>
+          <li><a href="https://www.w3.org/WAI/tutorials/images/decision-tree/">W3 WAI - How to use alt text in various situations</a></li>
+          <li><a href="https://www.deque.com/blog/creating-accessible-svgs/">Creating accessible SVGs</a></li>
+          <li><a href="https://www.smashingmagazine.com/2021/05/accessible-svg-patterns-comparison/">Accessible SVGs: Perfect Patterns For Screen Reader Users</a></li>
+        </ul>
+      </article>
+    </main>
     
     <footer>
       <a href="../index.html" class="button"><i class='fas fa-angle-left mr-05' aria-hidden='true'></i>Back to homepage</a>

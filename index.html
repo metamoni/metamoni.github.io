@@ -18,40 +18,42 @@
       <p><a href="https://www.freepik.com/free-photo/website-construction_953362.htm#query=under%20construction&position=15&from_view=search&track=sph">Image by d3images</a> on Freepik</p>
     </header>
     
-    <h1 id="homepage-header">Welcome to A11y on Rails!</h1>
+    <main>
+      <h1 id="homepage-header">Welcome to A11y on Rails!</h1>
 
-    <p>In most traditional web apps you can achieve a reasonable level of accessibility with semantic HTML and a good page structure. Rails apps are no different. The framework provides lots of handy Action View Helpers and they come with everything you need to make your app accessible. However, just like when writing plain HTML, it's easy enough to forget about crucial attributes and end up with a page that is not accessible.</p>
+      <p>In most traditional web apps you can achieve a reasonable level of accessibility with semantic HTML and a good page structure. Rails apps are no different. The framework provides lots of handy Action View Helpers and they come with everything you need to make your app accessible. However, just like when writing plain HTML, it's easy enough to forget about crucial attributes and end up with a page that is not accessible.</p>
 
-    <p>This website aims to tackle some of the most important accessibility concerns that you'll need to address in a Rails apps. You can read more about the project <a href="pages/about">here</a>.</p>
+      <p>This website aims to tackle some of the most important accessibility concerns that you'll need to address in a Rails apps. You can read more about the project <a href="pages/about">here</a>.</p>
 
-    <div id="articles-container">
-      <article>
-        <h2>Images</h2>
-        <p>All images must have an <code>alt</code> attribute. This allows screen readers to either describe relevant images to users or hide them if they're not relevant. <a href="pages/images.html">Read more<span class="sr-only"> about accessible images in Rails</span></a>
-        </p>
-      </article>
+      <div id="articles-container">
+        <article>
+          <h2>Images</h2>
+          <p>All images must have an <code>alt</code> attribute. This allows screen readers to either describe relevant images to users or hide them if they're not relevant. <a href="pages/images.html">Read more<span class="sr-only"> about accessible images in Rails</span></a>
+          </p>
+        </article>
 
-      <article>
-        <h2>Forms</h2>
-        <p>The purpose of each form field should be clear. Missing labels are one of the most common accessibility issues in web forms. <a href="pages/forms.html">Read more<span class="sr-only"> about accessible form helpers in Rails</span></a></p>
-      </article>
+        <article>
+          <h2>Forms</h2>
+          <p>The purpose of each form field should be clear. Missing labels are one of the most common accessibility issues in web forms. <a href="pages/forms.html">Read more<span class="sr-only"> about accessible form helpers in Rails</span></a></p>
+        </article>
 
-      <article>
-        <h2>Flash messages</h2>
-        <p>
-          Dynamic page updates, including flash messages, need a bit more work to be accessible to assistive tech users. <a href="pages/flash.html">Read more<span class="sr-only"> about accessible flash messages in Rails</span></a>
-        </p>
-      </article>
+        <article>
+          <h2>Flash messages</h2>
+          <p>
+            Dynamic page updates, including flash messages, need a bit more work to be accessible to assistive tech users. <a href="pages/flash.html">Read more<span class="sr-only"> about accessible flash messages in Rails</span></a>
+          </p>
+        </article>
 
-      <article>
-        <h2>Form validation</h2>
-        <p>Just like flash messages, custom validation errors are usually skipped by screen readers. ARIA live regions and ARIA roles can make your forms accessible to assistive tech users. <a href="pages/validation.html">Read more<span class="sr-only"> about accessible form validation in Rails</span></a></p>
-      </article>
+        <article>
+          <h2>Form validation</h2>
+          <p>Just like flash messages, custom validation errors are usually skipped by screen readers. ARIA live regions and ARIA roles can make your forms accessible to assistive tech users. <a href="pages/validation.html">Read more<span class="sr-only"> about accessible form validation in Rails</span></a></p>
+        </article>
 
-      <article>
-        <h2>Document language</h2>
-        <p>Adding a <code>lang</code> attribute to your HTML is an easy win. It helps render the text more accurately, load the correct pronunciation rules, and display video captions correctly. <a href="pages/language.html">Read more<span class="sr-only"> about document language in Rails</span></a></p>
-      </article>
-    </div>
+        <article>
+          <h2>Document language</h2>
+          <p>Adding a <code>lang</code> attribute to your HTML is an easy win. It helps render the text more accurately, load the correct pronunciation rules, and display video captions correctly. <a href="pages/language.html">Read more<span class="sr-only"> about document language in Rails</span></a></p>
+        </article>
+      </div>
+    </main>
   </body>
 </html>
