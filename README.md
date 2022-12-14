@@ -7,4 +7,3 @@ The framework provides lots of handy Action View Helpers and they come with ever
 This website covers navigation, links and buttons, language and internationalization, images, forms, validations, flash messages, validations in Rails apps and how to make these accessible.
 
 [Go to A11yOnRails](https://www.a11yonrails.com/)
-# metamoni.github.io
