@@ -1,4 +1,4 @@
-/* 
+/*
   colour scheme
   off-white: #f1f1f1
   gray: #A9A9A9
@@ -161,5 +161,13 @@ input[type=submit] {
 
   .center {
     text-align: center;
+  }
+
+  #articles-container {
+    display: block;
+  }
+
+  #articles-container article {
+    margin-top: 2em;
   }
 }
