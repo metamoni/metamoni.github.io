@@ -28,27 +28,31 @@
     <main>
       <article aria-labelledby="flash-problem">
         <h2 id="flash-problem">The problem</h2>
-      
+
         <p>Just like <a href="../pages/validation.html">validation errors</a>, flash messages need a bit more work to be accessible to assistive tech users. To expose dynamic updates to screen readers &#8212; including search results, alerts, or any notifications &#8212; you need to use <code>aria-live</code> or <a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles#4._live_region_roles">live region roles</a>. If you're going with roles, make sure to read the documentation carefully and use them correctly.</p>
       </article>
-      
+
       <article class="mb-2" aria-labelledby="flash-aria-live">
         <h2 id="flash-aria-live">ARIA live regions and flash messages</h2>
-      
-        <p>Say you want to display flash messages in your view. To make assistive tech announce them, you can add an <code>aria-live="polite"</code> attribute to the wrapping element.</p>
-      
+
+        <p>Say you want to display flash messages in your view. To make assistive tech announce them, you have to present the text in an HTML element with the attribute <code>aria-live="polite"</code> or <code>role="status"</code>. For errors that are important and need urgent attention, use <code>aria-live="assertive"</code> or <code>role="alert"</code>.</p>
+
+        <p>First, add an empty element to the page. Then use JavaScript to populate it with the flash message, when that gets rendered onto the page. If you want all the contents of the live region to be read out by screen readers, add <code>aria-atomic="true"</code> to your element.</p>
+
+        <p><strong>Note:</strong> Live region announcements don't need to be displayed to sighted users if they're not relevant. You can use CSS to hide the live region element from sighted users, or the flash messages from screen reader users. If using Tailwind CSS apply the <code><a href="https://tailwindcss.com/docs/screen-readers#screen-reader-only-elements">sr-only</a></code> class, and for Bootstrap you can use <code><a href="https://getbootstrap.com/docs/5.0/helpers/visually-hidden/">visually-hidden</a></code> to achieve the same thing. If you're writing your own styles, you can use this <a href="https://webaim.org/techniques/css/invisiblecontent/">WebAim .sr-only CSS example</a>. To hide content from screen readers and only display it to sighted users, apply <code>aria-hidden="true"</code>.</p>
+
         <iframe
           src="https://www.thiscodeworks.com/embed/62ac46798e180e00152748aa"
-          style="width: 100%; height: 307px;"
+          style="width: 100%; height: 400px;"
           frameborder="0"
           title="Make flash messages accessible to screen readers">
         </iframe>
       </article>
-      
+
       <article class="mb-2">
         <h2 id="flash-resources">Resources</h2>
         <ul>
-          <li><a href="https://github.com/joemasilotti/railsdevs.com/blob/cf512f61b9fdb2bd7f005319fc5ee1b0cd4ef363/app/views/shared/_flash.html.erb">Code sample from Railsdevs</a></li>
+          <li><a href="https://www.w3.org/WAI/WCAG22/Techniques/aria/ARIA19">WCAG Techniques - Using ARIA role=alert or Live Regions to Identify Errors</a></li>
           <li><a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Live_Regions">MDN - ARIA live regions</a></li>
           <li><a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles#4._live_region_roles">MDN - ARIA live region roles</a></li>
         </ul>
